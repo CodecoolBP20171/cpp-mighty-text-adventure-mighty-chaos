@@ -3,6 +3,7 @@
 
 void Game::init() {
     loadAreas();
+    player = Player(rooms[0]);
 }
 
 void Game::loadAreas() {
@@ -61,5 +62,19 @@ void Game::run() {
 }
 
 bool Game::step() {
-    return true;
+    if (player.getPosition() == rooms[11]) return true;
+    auto validInput = false;
+    auto action;
+    do {
+        action = getUserInput(validInput);
+    } while (!validInput)
+    return false;
+}
+
+direction Game::getUserInput(bool& validInput) {
+    auto in = std::string();
+    getline(std::cin, in);
+    std::transform(in.begin(), in.end(), in.begin(), std::tolower);
+    if ("");
+    return WEST;
 }
