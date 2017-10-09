@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Area.hpp"
+#include "Room.h"
 
 using namespace std;
 
@@ -13,9 +14,11 @@ public:
 
 private:
     vector<Area> areas; // areas has only non-changeable information
+    Room* rooms[12];
 
     void loadAreas();
     bool step();
+    void buildRooms() const;
 };
 
 
