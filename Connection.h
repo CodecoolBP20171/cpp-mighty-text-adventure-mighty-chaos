@@ -1,21 +1,24 @@
 #ifndef CPP_2ND_TW_MIGHTY_TEXT_ADVENTURE_CONNECTION_H
 #define CPP_2ND_TW_MIGHTY_TEXT_ADVENTURE_CONNECTION_H
 
-#include "Room.h"
+#include <string>
+
 
 enum direction {
-    NORTH, SOUTH, WEST, EAST
+    NORTH, SOUTH, WEST, EAST, INVALID
 };
 
 class Connection {
+
 public:
-    Connection(direction dir, Room* room);
+    Connection(direction dir, void* room);
     direction getDir() const;
-    Room* getRoom() const;
+    std::string getDirStr() const;
+    void* getRoom() const;
 
 private:
     direction dir;
-    Room* room;
+    void* room;
 };
 
 #endif //CPP_2ND_TW_MIGHTY_TEXT_ADVENTURE_CONNECTION_H

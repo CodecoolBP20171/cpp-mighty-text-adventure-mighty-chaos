@@ -7,13 +7,13 @@
 
 class Room {
 public:
-    Room(Area* area);
-    Area* getArea() const;
+    Room(const Area* area);
+    const Area* getArea() const;
     const vector<Connection*>& getConnections() const;
     void addConnection(direction dir, Room* room);
 
 private:
-    Area* area;
+    const Area* area;
     std::vector<Connection*> connections;
 };
 

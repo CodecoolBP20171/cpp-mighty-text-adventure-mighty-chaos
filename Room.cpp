@@ -1,8 +1,8 @@
 #include "Room.h"
 
-Room::Room(Area* area) : area(area) {}
+Room::Room(const Area* area) : area(area) {}
 
-Area* Room::getArea() const {
+const Area* Room::getArea() const {
     return area;
 }
 

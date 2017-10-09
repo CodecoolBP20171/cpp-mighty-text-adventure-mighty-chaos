@@ -6,6 +6,8 @@ void Game::init() {
     player = Player(rooms[0]);
 }
 
+Game::Game() : player(nullptr) {}
+
 void Game::loadAreas() {
     areas.emplace_back("start room");
     areas.emplace_back("room 1");
@@ -17,20 +19,22 @@ void Game::loadAreas() {
     buildRooms();
 }
 
-void Game::buildRooms() const {
-    rooms[0] = new Room(&areas[0]);
-    rooms[1] = new Room(&areas[1]);
-    rooms[2] = new Room(&areas[3]);
-    rooms[3] = new Room(&areas[5]);
-    rooms[4] = new Room(&areas[4]);
-    rooms[5] = new Room(&areas[2]);
-    rooms[6] = new Room(&areas[3]);
-    rooms[7] = new Room(&areas[1]);
-    rooms[8] = new Room(&areas[5]);
-    rooms[9] = new Room(&areas[2]);
-    rooms[10] = new Room(&areas[4]);
-    rooms[11] = new Room(&areas[5]);
-    rooms[12] = new Room(&areas[7]);
+void Game::buildRooms() {
+
+    rooms.emplace_back(new Room(&areas[0]));
+    rooms.emplace_back(new Room(&areas[1]));
+    rooms.emplace_back(new Room(&areas[3]));
+    rooms.emplace_back(new Room(&areas[5]));
+    rooms.emplace_back(new Room(&areas[4]));
+    rooms.emplace_back(new Room(&areas[2]));
+    rooms.emplace_back(new Room(&areas[3]));
+    rooms.emplace_back(new Room(&areas[1]));
+    rooms.emplace_back(new Room(&areas[5]));
+    rooms.emplace_back(new Room(&areas[2]));
+    rooms.emplace_back(new Room(&areas[4]));
+    rooms.emplace_back(new Room(&areas[5]));
+    rooms.emplace_back(new Room(&areas[7]));
+
     rooms[0]->addConnection(EAST, rooms[1]);
     rooms[1]->addConnection(WEST, rooms[0]);
     rooms[1]->addConnection(NORTH, rooms[2]);
@@ -62,19 +66,37 @@ void Game::run() {
 }
 
 bool Game::step() {
-    if (player.getPosition() == rooms[11]) return true;
-    auto validInput = false;
-    auto action;
+    auto playerPosition = player.getPosition();
+    if (playerPosition == rooms[11]) return true;
+
+    std::cout<<playerPosition->getArea()->getDescription()<<std::endl;
+
+    for (auto conn : playerPosition->getConnections()) {
+        std::cout<<conn->getDirStr()<<std::endl;
+    }
+
+    auto action = INVALID;
     do {
-        action = getUserInput(validInput);
-    } while (!validInput)
+        action = getUserInput();
+    } while (action == INVALID);
+
+    for (auto conn : playerPosition->getConnections()) {
+        if (conn->getDir() == action) {
+            player.setPosition((Room*) conn->getRoom());
+            break;
+        }
+    }
+
     return false;
 }
 
-direction Game::getUserInput(bool& validInput) {
+direction Game::getUserInput() {
     auto in = std::string();
     getline(std::cin, in);
-    std::transform(in.begin(), in.end(), in.begin(), std::tolower);
-    if ("");
-    return WEST;
+    std::transform(in.begin(), in.end(), in.begin(), ::tolower);
+    if ((in =="w")||(in =="west")) return WEST;
+    if ((in =="n")||(in =="north")) return NORTH;
+    if ((in =="s")||(in =="south")) return SOUTH;
+    if ((in =="e")||(in =="east")) return EAST;
+    return INVALID;
 }

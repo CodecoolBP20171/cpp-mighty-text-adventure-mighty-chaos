@@ -11,18 +11,20 @@ using namespace std;
 
 class Game {
 public:
+    Game();
+
     void init();
     void run();
 
 private:
     vector<Area> areas; // areas has only non-changeable information
-    Room* rooms[12];
+    vector<Room*> rooms;
     Player player;
 
     void loadAreas();
     bool step();
-    void buildRooms() const;
-    direction getUserInput(bool& validInput);
+    void buildRooms();
+    direction getUserInput();
 };
 
 
