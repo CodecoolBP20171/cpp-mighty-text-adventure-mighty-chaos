@@ -78,7 +78,8 @@ bool Game::step() {
     auto action = INVALID;
     do {
         action = getUserInput();
-    } while (action == INVALID);
+        if (action == HELP) showHelp();
+    } while (action == INVALID||action == HELP);
 
     for (auto conn : playerPosition->getConnections()) {
         if (conn->getDir() == action) {
@@ -98,5 +99,10 @@ direction Game::getUserInput() {
     if ((in =="n")||(in =="north")) return NORTH;
     if ((in =="s")||(in =="south")) return SOUTH;
     if ((in =="e")||(in =="east")) return EAST;
+    if ((in =="h")||(in =="help")) return HELP;
     return INVALID;
+}
+
+void Game::showHelp() {
+    std::cout<<"Next room: w/n/s/e, help: h"<<std::endl;
 }

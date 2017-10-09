@@ -5,7 +5,7 @@
 
 
 enum direction {
-    NORTH, SOUTH, WEST, EAST, INVALID
+    NORTH, SOUTH, WEST, EAST, INVALID, HELP,
 };
 
 class Connection {

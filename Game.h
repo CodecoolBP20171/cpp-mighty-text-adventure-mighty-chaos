@@ -25,6 +25,7 @@ private:
     bool step();
     void buildRooms();
     direction getUserInput();
+    void showHelp();
 };
 
 
