@@ -150,15 +150,15 @@ void Game::run() {
 bool Game::step() {
     auto playerPosition = player.getPosition();
 
-    std::cout << std::endl << playerPosition->getArea()->getDescription() << std::endl << std::endl;
+    std::cout << std::endl << playerPosition->getDescription() << std::endl << std::endl;
 
     for (auto conn : playerPosition->getConnections()) {
         std::cout << "To the " << conn->getDirStr() << " is ";
-        std::cout << ((Room*) (conn->getRoom()))->getArea()->getDoor() << std::endl;
+        std::cout << ((Room*) (conn->getRoom()))->getDoor() << std::endl;
     }
     if (playerPosition == rooms[11]) {
 
-        std::cout << "To the South is " << rooms[0]->getArea()->getDoor() << std::endl;
+        std::cout << "To the South is " << rooms[0]->getDoor() << std::endl;
         std::cout << "\nYou head out the door.\n\nSo long and thanks for all the fish!\n\n";
 
         return true;

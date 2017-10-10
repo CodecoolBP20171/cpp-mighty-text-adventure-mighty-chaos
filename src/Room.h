@@ -11,6 +11,8 @@ public:
     const Area* getArea() const;
     const vector<Connection*>& getConnections() const;
     void addConnection(direction dir, Room* room);
+    const string &getDescription() const;
+    const string &getDoor() const;
 
 private:
     const Area* area;

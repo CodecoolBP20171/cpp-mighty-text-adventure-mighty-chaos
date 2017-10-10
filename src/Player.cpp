@@ -9,3 +9,15 @@ Room* Player::getPosition() const {
 void Player::setPosition(Room* position) {
     Player::position = position;
 }
+
+void Player::takeItem(Item* item) {
+    inventory->addItem(item);
+}
+
+void Player::dropItem(Item* item) {
+    inventory->removeItem(item);
+}
+
+void Player::showInventory() const {
+    inventory->displayInventory();
+}
