@@ -21,3 +21,12 @@ void Player::dropItem(Item* item) {
 void Player::showInventory() const {
     inventory->displayInventory();
 }
+
+void Player::act(action dir) {
+    for (auto conn : position->getConnections()) {
+        if (conn->getDir() == (direction) dir) {
+            position = (Room*) conn->getRoom();
+            return;
+        }
+    }
+}

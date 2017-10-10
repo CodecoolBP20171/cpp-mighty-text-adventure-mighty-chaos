@@ -12,6 +12,7 @@ public:
     void takeItem(Item* item);
     void dropItem(Item* item);
     void showInventory() const;
+    void act(action dir);
 
 private:
     Room* position;

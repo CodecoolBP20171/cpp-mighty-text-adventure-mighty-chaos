@@ -171,12 +171,7 @@ bool Game::step() {
         if (act == action::INVALID) std::cout << "Whaat?!";
     } while (act == action::INVALID || act == action::HELP);
 
-    for (auto conn : playerPosition->getConnections()) {
-        if (conn->getDir() == (direction) act) {
-            player.setPosition((Room*) conn->getRoom());
-            break;
-        }
-    }
+    player.act(act)
 
     return false;
 }
