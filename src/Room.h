@@ -1,7 +1,7 @@
 #ifndef CPP_2ND_TW_MIGHTY_TEXT_ADVENTURE_ROOM_H
 #define CPP_2ND_TW_MIGHTY_TEXT_ADVENTURE_ROOM_H
 
-#include "Area.hpp"
+#include "../Area.hpp"
 #include "Connection.h"
 #include <vector>
 

@@ -4,8 +4,8 @@
 #include <vector>
 #include <algorithm>
 #include "Area.hpp"
-#include "Room.h"
-#include "Player.h"
+#include "src/Room.h"
+#include "src/Player.h"
 
 using namespace std;
 

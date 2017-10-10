@@ -9,11 +9,12 @@ void Game::init() {
 Game::Game() : player(nullptr) {}
 
 void Game::loadAreas() {
-    areas.emplace_back("From the outside this house looks impressive.\nIt has been built with wood covered in render and "
-                               "has oak wooden decorations.\nSmall, rounded windows let in plenty of light and have been "
-                               "added to the house in a mostly symmetric way.",
-                       "an iron-reinforced wide framed and paneled wooden double door crafted of poplar that is stained "
-                               "a vibrant color.");
+    areas.emplace_back(
+            "From the outside this house looks impressive.\nIt has been built with wood covered in render and "
+                    "has oak wooden decorations.\nSmall, rounded windows let in plenty of light and have been "
+                    "added to the house in a mostly symmetric way.",
+            "an iron-reinforced wide framed and paneled wooden double door crafted of poplar that is stained "
+                    "a vibrant color.");
 
     areas.emplace_back("This large, rectangular bedroom has matching wooden furniture.\nThe floor is wood and the walls"
                                " are textured and painted. Light is provided by ceiling lights.\nThe room is done in a "
@@ -97,16 +98,16 @@ void Game::run() {
 bool Game::step() {
     auto playerPosition = player.getPosition();
 
-    std::cout <<std::endl<<playerPosition->getArea()->getDescription()<<std::endl<<std::endl;
+    std::cout << std::endl << playerPosition->getArea()->getDescription() << std::endl << std::endl;
 
     for (auto conn : playerPosition->getConnections()) {
-        std::cout <<"To the "<<conn->getDirStr() << " is ";
-        std::cout <<((Room*)(conn->getRoom()))->getArea()->getDoor()<<std::endl;
+        std::cout << "To the " << conn->getDirStr() << " is ";
+        std::cout << ((Room*) (conn->getRoom()))->getArea()->getDoor() << std::endl;
     }
     if (playerPosition == rooms[11]) {
 
-        std::cout <<"To the South is "<<rooms[0]->getArea()->getDoor()<<std::endl;
-        std::cout <<"\nYou head out the door.\n\nSo long and thanks for all the fish!\n\n";
+        std::cout << "To the South is " << rooms[0]->getArea()->getDoor() << std::endl;
+        std::cout << "\nYou head out the door.\n\nSo long and thanks for all the fish!\n\n";
 
         return true;
     }
@@ -115,8 +116,7 @@ bool Game::step() {
     do {
         act = getUserInput();
         if (act == action::HELP) showHelp();
-        if (act == action::INVALID) std::cout <<"Whaat?! ";;
-
+        if (act == action::INVALID) std::cout << "Whaat?!";
     } while (act == action::INVALID || act == action::HELP);
 
     for (auto conn : playerPosition->getConnections()) {
@@ -131,7 +131,7 @@ bool Game::step() {
 
 action Game::getUserInput() {
     auto in = std::string();
-    std::cout <<"\nWhat do you do? ";
+    std::cout << "\nWhat do you do? ";
     getline(std::cin, in);
     std::transform(in.begin(), in.end(), in.begin(), ::tolower);
     if (in == "w" || in == "west") return action::WEST;
