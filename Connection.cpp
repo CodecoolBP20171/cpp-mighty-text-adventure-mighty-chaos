@@ -14,13 +14,13 @@ std::string Connection::getDirStr() const {
 
     switch (dir) {
         case direction::NORTH :
-            return "N";
+            return "North";
         case direction::SOUTH :
-            return "S";
+            return "South";
         case direction::WEST :
-            return "W";
+            return "West";
         case direction::EAST :
-            return "E";
+            return "East";
     }
-    return "INV";
+    return "No direction";
 }
