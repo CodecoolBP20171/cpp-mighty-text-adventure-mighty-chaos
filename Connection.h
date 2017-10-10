@@ -3,9 +3,12 @@
 
 #include <string>
 
+enum class direction {
+    NORTH, SOUTH, WEST, EAST
+};
 
-enum direction {
-    NORTH, SOUTH, WEST, EAST, INVALID, HELP,
+enum class action {
+    NORTH, SOUTH, WEST, EAST, INVALID, HELP
 };
 
 class Connection {

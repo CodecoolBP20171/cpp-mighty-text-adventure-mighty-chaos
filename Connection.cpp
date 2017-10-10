@@ -13,14 +13,14 @@ void* Connection::getRoom() const {
 std::string Connection::getDirStr() const {
 
     switch (dir) {
-        case NORTH :
+        case direction::NORTH :
             return "N";
-        case SOUTH :
+        case direction::SOUTH :
             return "S";
-        case WEST :
+        case direction::WEST :
             return "W";
-        case EAST :
+        case direction::EAST :
             return "E";
     }
-    return "INVALID";
+    return "INV";
 }

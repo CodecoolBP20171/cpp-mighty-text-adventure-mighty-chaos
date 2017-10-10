@@ -24,7 +24,7 @@ private:
     void loadAreas();
     bool step();
     void buildRooms();
-    direction getUserInput();
+    action getUserInput();
     void showHelp();
 };
 
