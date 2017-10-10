@@ -3,6 +3,7 @@
 
 void Game::init() {
     loadAreas();
+    loadItems();
     player = Player(rooms[0]);
 }
 
@@ -91,6 +92,57 @@ void Game::buildRooms() {
     rooms[10]->addConnection(direction::SOUTH, rooms[11]);
 }
 
+void Game::loadItems() {
+    //name, decription, keyword, weight
+
+    items.emplace_back("Chaos Creamy Meal",
+                       "This delicious, tasty meal fully restore your HP",
+                       "food", 1);
+
+    items.emplace_back("Thunder Steel Katana",
+                       "A thin, smooth blade made of adamantium is held by a grip wrapped in dull crocodile leather.\n"
+                               "This weapon is the ideal choice to turn your enemies into Swiss cheese.\n"
+                               "The blade has a small, curled cross-guard with a jeweled lion head on each side,\n"
+                               "this weapon was clearly a custom order, probably by an important figure.\n"
+                               "A wide pommel is decorated with gilded linings, no expense is spared for this gorgeous weapon.\n"
+                               "The blade itself is fairly simple, but the blade will surely be decorated in battle.",
+                       "sword", 3);
+
+    items.emplace_back("Insane Heartseeker Battle Axe",
+                       "A large, sharp, dual-edged blade axe made of copper is held by a grip wrapped in sapphire blue boar hide\n"
+                               "This is the ideal weapon if you're looking to slice, dice, stab and jab your enemies.\n"
+                               "The blade itself is fairly simple. No decorations of any sorts are on it, an everyday weapon.",
+                       "axe", 7);
+
+    items.emplace_back("Key",
+                       "A key.",
+                       "key", 0);
+
+    items.emplace_back("Potion of Daze",
+                       "A potion\nThis potion stuns monsters, allows you to escape.",
+                       "stun", 0);
+
+    items.emplace_back("Light Wraps of Binding Warlords",
+                       "This is a set of leather armor.\nIt covers everything from the neck down and ending at the groin,\n"
+                               "It has a coif with two small horns. The breastplate is made from many v-shaped layers of leather and fur.\n"
+                               "The legs are protected by leather greaves. Thin leather pants are worn beneath this all.",
+                       "armor", 3);
+
+    items.emplace_back("Heavy Armor of Broken Misery",
+                       "This is a set of heavy armor.\nIt is made from many layers of squared metal sheets.\n"
+                               "It has a squared helm with half a face guard shaped like the eyes of an angel.\n"
+                               "The breastplate has a metal, mohawk-like ornament with a row of feathers inserted into it.\n"
+                               "The legs are covered by pointed, half covering cuisses.",
+                       "harmor", 7);
+
+    items.emplace_back("Crying Heavy Shield",
+                       "This sturdy rounded oval shield, made from ebonsteel, offers heavy duty protection.\n"
+                               "This shield was forged by abyss dwarves in a cryo workshop.\n"
+                               "The shield's edges are enhanced with metal plating and have been decorated\n"
+                               "with small repeated symbols. Its center is embellished with metalwork wings.",
+                       "shield", 5);
+}
+
 void Game::run() {
     while (!step()) {}
 }
@@ -145,3 +197,4 @@ action Game::getUserInput() {
 void Game::showHelp() {
     std::cout << "Next room: w/n/s/e, help: h" << std::endl;
 }
+

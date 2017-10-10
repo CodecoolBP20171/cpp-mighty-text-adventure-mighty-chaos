@@ -6,6 +6,7 @@
 #include "Area.hpp"
 #include "src/Room.h"
 #include "src/Player.h"
+#include "src/ItemDescriptor.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ public:
 
 private:
     vector<Area> areas; // areas has only non-changeable information
+    vector<ItemDescriptor> items; // items has only non-changeable information
     vector<Room*> rooms;
     Player player;
 
@@ -26,6 +28,8 @@ private:
     void buildRooms();
     action getUserInput();
     void showHelp();
+
+    void loadItems();
 };
 
 
