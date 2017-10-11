@@ -3,6 +3,7 @@
 
 #include "Room.h"
 #include "Inventory.h"
+#include "Action.h"
 
 class Player {
 public:
@@ -12,7 +13,7 @@ public:
     void takeItem(Item* item);
     void dropItem(Item* item);
     void showInventory() const;
-    void act(action dir);
+    void act(Action* activity);
 
 private:
     Room* position;

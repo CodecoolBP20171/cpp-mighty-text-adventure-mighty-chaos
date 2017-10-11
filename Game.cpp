@@ -93,11 +93,12 @@ void Game::buildRooms() {
 }
 
 void Game::loadItems() {
-    //name, decription, keyword, weight
+    //name, description, keyword, weight
 
     items.emplace_back("Chaos Creamy Meal",
                        "This delicious, tasty meal fully restore your HP",
                        "food", 1);
+    keywrds.emplace_back("food");
 
     items.emplace_back("Thunder Steel Katana",
                        "A thin, smooth blade made of adamantium is held by a grip wrapped in dull crocodile leather.\n"
@@ -107,26 +108,31 @@ void Game::loadItems() {
                                "A wide pommel is decorated with gilded linings, no expense is spared for this gorgeous weapon.\n"
                                "The blade itself is fairly simple, but the blade will surely be decorated in battle.",
                        "sword", 3);
+    keywrds.emplace_back("sword");
 
     items.emplace_back("Insane Heartseeker Battle Axe",
                        "A large, sharp, dual-edged blade axe made of copper is held by a grip wrapped in sapphire blue boar hide\n"
                                "This is the ideal weapon if you're looking to slice, dice, stab and jab your enemies.\n"
                                "The blade itself is fairly simple. No decorations of any sorts are on it, an everyday weapon.",
                        "axe", 7);
+    keywrds.emplace_back("axe");
 
     items.emplace_back("Key",
                        "A key.",
                        "key", 0);
+    keywrds.emplace_back("key");
 
     items.emplace_back("Potion of Daze",
                        "A potion\nThis potion stuns monsters, allows you to escape.",
                        "stun", 0);
+    keywrds.emplace_back("stun");
 
     items.emplace_back("Light Wraps of Binding Warlords",
                        "This is a set of leather armor.\nIt covers everything from the neck down and ending at the groin,\n"
                                "It has a coif with two small horns. The breastplate is made from many v-shaped layers of leather and fur.\n"
                                "The legs are protected by leather greaves. Thin leather pants are worn beneath this all.",
                        "armor", 3);
+    keywrds.emplace_back("armor");
 
     items.emplace_back("Heavy Armor of Broken Misery",
                        "This is a set of heavy armor.\nIt is made from many layers of squared metal sheets.\n"
@@ -134,6 +140,7 @@ void Game::loadItems() {
                                "The breastplate has a metal, mohawk-like ornament with a row of feathers inserted into it.\n"
                                "The legs are covered by pointed, half covering cuisses.",
                        "harmor", 7);
+    keywrds.emplace_back("harmor");
 
     items.emplace_back("Crying Heavy Shield",
                        "This sturdy rounded oval shield, made from ebonsteel, offers heavy duty protection.\n"
@@ -141,6 +148,7 @@ void Game::loadItems() {
                                "The shield's edges are enhanced with metal plating and have been decorated\n"
                                "with small repeated symbols. Its center is embellished with metalwork wings.",
                        "shield", 5);
+    keywrds.emplace_back("shield");
 }
 
 void Game::run() {
@@ -164,29 +172,25 @@ bool Game::step() {
         return true;
     }
 
-    action act;
-    do {
-        act = getUserInput();
-        if (act == action::HELP) showHelp();
-        if (act == action::INVALID) std::cout << "Whaat?!";
-    } while (act == action::INVALID || act == action::HELP);
+    Action act;
 
-    player.act(act)
+    do {
+        getUserInput(&act);
+        if (act.getType() == action::HELP) showHelp();
+        if (act.getType() == action::INVALID) std::cout << "Whaat?!";
+    } while (act.getType() == action::INVALID || act.getType() == action::HELP);
+
+    player.act(&act);
 
     return false;
 }
 
-action Game::getUserInput() {
+void Game::getUserInput(Action* a) {
     auto in = std::string();
     std::cout << "\nWhat do you do? ";
     getline(std::cin, in);
     std::transform(in.begin(), in.end(), in.begin(), ::tolower);
-    if (in == "w" || in == "west") return action::WEST;
-    if (in == "n" || in == "north") return action::NORTH;
-    if (in == "s" || in == "south") return action::SOUTH;
-    if (in == "e" || in == "east") return action::EAST;
-    if (in == "h" || in == "help") return action::HELP;
-    return action::INVALID;
+    a->Parse(in, keywrds);
 }
 
 void Game::showHelp() {

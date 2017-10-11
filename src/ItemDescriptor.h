@@ -5,15 +5,15 @@
 
 class ItemDescriptor {
 public:
-    ItemDescriptor(const std::string& name, const std::string& decription, const std::string& keyword, const int weight);
+    ItemDescriptor(const std::string& name, const std::string& description, const std::string& keyword, const int weight);
     const std::string& getName() const;
-    const std::string& getDecription() const;
+    const std::string& getDescription() const;
     const std::string& getKeyword() const;
     const int getWeight() const;
 
 private:
     const std::string name;
-    const std::string decription;
+    const std::string description;
     const std::string keyword;
     const int weight;
 

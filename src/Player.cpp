@@ -22,9 +22,10 @@ void Player::showInventory() const {
     inventory->displayInventory();
 }
 
-void Player::act(action dir) {
+void Player::act(Action* activity) {
+
     for (auto conn : position->getConnections()) {
-        if (conn->getDir() == (direction) dir) {
+        if (conn->getDir() == (direction) activity->getType()) {
             position = (Room*) conn->getRoom();
             return;
         }

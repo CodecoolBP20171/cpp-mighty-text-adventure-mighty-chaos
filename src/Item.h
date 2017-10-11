@@ -4,6 +4,7 @@
 #include "ItemDescriptor.h"
 
 class Item {
+
 public:
     Item(ItemDescriptor* descriptor, int count);
     int getCount() const;

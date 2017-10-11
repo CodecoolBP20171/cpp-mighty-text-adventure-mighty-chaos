@@ -7,9 +7,6 @@ enum class direction {
     NORTH, SOUTH, WEST, EAST
 };
 
-enum class action {
-    NORTH, SOUTH, WEST, EAST, INVALID, HELP
-};
 
 class Connection {
 

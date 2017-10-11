@@ -4,6 +4,7 @@
 Inventory::Inventory() : weight(0) {}
 
 void Inventory::addItem(Item* item) {
+
     auto newItemKeyword = item->getKeyword();
     for (auto i : items) {
         if (i->getKeyword() == newItemKeyword) {

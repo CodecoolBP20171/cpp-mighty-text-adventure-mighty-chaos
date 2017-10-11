@@ -16,7 +16,7 @@ const std::string& Item::getName() const {
 }
 
 const std::string& Item::getDecription() const {
-    return descriptor->getDecription();
+    return descriptor->getDescription();
 }
 
 const std::string& Item::getKeyword() const {
