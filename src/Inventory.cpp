@@ -3,6 +3,10 @@
 
 Inventory::Inventory() : weight(0) {}
 
+int Inventory::getWeight() const {
+    return weight;
+}
+
 void Inventory::addItem(Item* item) {
 
     auto newItemKeyword = item->getKeyword();

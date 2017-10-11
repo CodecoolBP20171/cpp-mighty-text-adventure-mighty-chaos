@@ -97,7 +97,7 @@ void Game::loadItems() {
 
     items.emplace_back("Chaos Creamy Meal",
                        "This delicious, tasty meal fully restore your HP",
-                       "food", 1);
+                       "food", 10);
     keywrds.emplace_back("food");
 
     items.emplace_back("Thunder Steel Katana",
@@ -107,31 +107,31 @@ void Game::loadItems() {
                                "this weapon was clearly a custom order, probably by an important figure.\n"
                                "A wide pommel is decorated with gilded linings, no expense is spared for this gorgeous weapon.\n"
                                "The blade itself is fairly simple, but the blade will surely be decorated in battle.",
-                       "sword", 3);
+                       "sword", 35);
     keywrds.emplace_back("sword");
 
     items.emplace_back("Insane Heartseeker Battle Axe",
                        "A large, sharp, dual-edged blade axe made of copper is held by a grip wrapped in sapphire blue boar hide\n"
                                "This is the ideal weapon if you're looking to slice, dice, stab and jab your enemies.\n"
                                "The blade itself is fairly simple. No decorations of any sorts are on it, an everyday weapon.",
-                       "axe", 7);
+                       "axe", 70);
     keywrds.emplace_back("axe");
 
     items.emplace_back("Key",
                        "A key.",
-                       "key", 0);
+                       "key", 1);
     keywrds.emplace_back("key");
 
     items.emplace_back("Potion of Daze",
                        "A potion\nThis potion stuns monsters, allows you to escape.",
-                       "stun", 0);
+                       "stun", 3);
     keywrds.emplace_back("stun");
 
     items.emplace_back("Light Wraps of Binding Warlords",
                        "This is a set of leather armor.\nIt covers everything from the neck down and ending at the groin,\n"
                                "It has a coif with two small horns. The breastplate is made from many v-shaped layers of leather and fur.\n"
                                "The legs are protected by leather greaves. Thin leather pants are worn beneath this all.",
-                       "armor", 3);
+                       "armor", 25);
     keywrds.emplace_back("armor");
 
     items.emplace_back("Heavy Armor of Broken Misery",
@@ -139,7 +139,7 @@ void Game::loadItems() {
                                "It has a squared helm with half a face guard shaped like the eyes of an angel.\n"
                                "The breastplate has a metal, mohawk-like ornament with a row of feathers inserted into it.\n"
                                "The legs are covered by pointed, half covering cuisses.",
-                       "harmor", 7);
+                       "harmor", 75);
     keywrds.emplace_back("harmor");
 
     items.emplace_back("Crying Heavy Shield",
@@ -147,7 +147,7 @@ void Game::loadItems() {
                                "This shield was forged by abyss dwarves in a cryo workshop.\n"
                                "The shield's edges are enhanced with metal plating and have been decorated\n"
                                "with small repeated symbols. Its center is embellished with metalwork wings.",
-                       "shield", 5);
+                       "shield", 50);
     keywrds.emplace_back("shield");
     placeItems();
 }
@@ -185,8 +185,12 @@ bool Game::step() {
         return true;
     }
 
-    Action act;
+    if (playerPosition->getInventory()->getWeight() > 0) {
+        std::cout << "\nIn this room you find:\n";
+        playerPosition->getInventory()->displayInventory();
+    }
 
+    Action act;
     do {
         getUserInput(&act);
         if (act.getType() == action::HELP) showHelp();
@@ -207,6 +211,10 @@ void Game::getUserInput(Action* a) {
 }
 
 void Game::showHelp() {
-    std::cout << "Next room: w/n/s/e, help: h" << std::endl;
+    std::cout << "\nControls:\n\nMoving: w, n, s, e\n"
+            "Take items: One: t <item type>, Any: t <item type><number>, All: t all\n"
+            "Drop items: One: d <item type>, Any: d <item type><number>, All: d all\n"
+            "Check inventory: inv\n"
+            "Item info: i <item>\n";
 }
 

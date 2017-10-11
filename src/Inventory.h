@@ -5,11 +5,14 @@
 #include "Item.h"
 
 class Inventory {
+
 public:
     Inventory();
     void addItem(Item* item);
     void removeItem(Item* item);
     void displayInventory() const;
+    int getWeight() const;
+
 
 private:
     std::vector<Item*> items;
