@@ -1,6 +1,6 @@
 #include "Room.h"
 
-Room::Room(const Area* area) : area(area) {}
+Room::Room(const Area* area) : area(area), inventory(new Inventory()) {}
 
 const Area* Room::getArea() const {
     return area;
@@ -21,4 +21,8 @@ const string& Room::getDescription() const {
 
 const string& Room::getDoor() const {
     return area->getDoor();
+}
+
+Inventory* Room::getInventory() const {
+    return inventory;
 }
