@@ -30,8 +30,8 @@ private:
     void buildRooms();
     void getUserInput(Action* a);
     void showHelp();
-
     void loadItems();
+    void placeItems();
 };
 
 

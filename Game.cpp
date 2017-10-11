@@ -149,6 +149,19 @@ void Game::loadItems() {
                                "with small repeated symbols. Its center is embellished with metalwork wings.",
                        "shield", 5);
     keywrds.emplace_back("shield");
+    placeItems();
+}
+
+void Game::placeItems() {
+    rooms[0]->getInventory()->addItem(new Item(&items[0], 1));
+    rooms[1]->getInventory()->addItem(new Item(&items[5], 1));
+    rooms[5]->getInventory()->addItem(new Item(&items[2], 1));
+    rooms[5]->getInventory()->addItem(new Item(&items[7], 1));
+    rooms[3]->getInventory()->addItem(new Item(&items[1], 1));
+    rooms[2]->getInventory()->addItem(new Item(&items[4], 1));
+    rooms[6]->getInventory()->addItem(new Item(&items[3], 1));
+    rooms[8]->getInventory()->addItem(new Item(&items[6], 1));
+    rooms[10]->getInventory()->addItem(new Item(&items[0], 1));
 }
 
 void Game::run() {
