@@ -9,6 +9,7 @@ public:
     Item(ItemDescriptor* descriptor, int count);
     int getCount() const;
     void changeCount(int diff);
+    void setCount(int count);
     const std::string& getName() const;
     const std::string& getDecription() const;
     const std::string& getKeyword() const;

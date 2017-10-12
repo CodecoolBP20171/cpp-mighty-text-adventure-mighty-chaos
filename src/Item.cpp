@@ -26,3 +26,7 @@ const std::string& Item::getKeyword() const {
 const int Item::getWeight() const {
     return descriptor->getWeight();
 }
+
+void Item::setCount(int count) {
+    Item::count = count;
+}

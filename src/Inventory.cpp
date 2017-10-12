@@ -8,8 +8,7 @@ int Inventory::getWeight() const {
 }
 
 void Inventory::addItem(Item* item) {
-
-    auto newItemKeyword = item->getKeyword();
+    auto& newItemKeyword = item->getKeyword();
     for (auto i : items) {
         if (i->getKeyword() == newItemKeyword) {
             i->changeCount(item->getCount());
@@ -17,25 +16,27 @@ void Inventory::addItem(Item* item) {
             return;
         }
     }
-    items.emplace_back(item);
+    items.push_back(item);
     weight += item->getCount() * item->getWeight();
 }
 
-void Inventory::removeItem(Item* item) {
+int Inventory::removeItem(const Item* item) {
     auto& removedItemKeyword = item->getKeyword();
     auto iter = items.begin();
     while (iter < items.end()) {
         if ((*iter)->getKeyword() == removedItemKeyword) {
-            auto diff = (*iter)->getCount() - item->getCount() < 0
+            auto diff = ((*iter)->getCount() - item->getCount() < 0) ||
+                        item->getCount() == 0
                         ? (*iter)->getCount()
                         : item->getCount();
             (*iter)->changeCount(-(item->getCount()));
             if ((*iter)->getCount() <= 0) items.erase(iter);
             weight -= diff * item->getWeight();
-            return;
+            return diff;
         }
         iter++;
     }
+    return 0;
 }
 
 void Inventory::displayInventory() const {

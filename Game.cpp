@@ -195,7 +195,23 @@ bool Game::step() {
         getUserInput(&act);
         if (act.getType() == action::HELP) showHelp();
         if (act.getType() == action::INVALID) std::cout << "Whaat?!";
-    } while (act.getType() == action::INVALID || act.getType() == action::HELP);
+        if (act.getType() == action::INFO) {
+            for (auto& item : items) {
+                if (item.getKeyword() == act.getItem()) {
+                    std::cout << "" << std::endl;
+                }
+            }
+        }
+    } while (act.getType() == action::INVALID ||
+             act.getType() == action::HELP ||
+             act.getType() == action::INFO);
+
+    for (auto& item : items) {
+        if (item.getKeyword() == act.getItem()) {
+            act.setItemDescriptor(&item);
+            break;
+        }
+    }
 
     player.act(&act);
 
@@ -212,8 +228,8 @@ void Game::getUserInput(Action* a) {
 
 void Game::showHelp() {
     std::cout << "\nControls:\n\nMoving: w, n, s, e\n"
-            "Take items: One: t <item type>, Any: t <item type><number>, All: t all\n"
-            "Drop items: One: d <item type>, Any: d <item type><number>, All: d all\n"
+            "Take items: One: t <item type>, Any: t <item type> <number>, All: t all\n"
+            "Drop items: One: d <item type>, Any: d <item type> <number>, All: d all\n"
             "Check inventory: inv\n"
             "Item info: i <item>\n";
 }

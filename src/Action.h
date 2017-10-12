@@ -7,7 +7,7 @@
 
 #include <string>
 #include <vector>
-
+#include "ItemDescriptor.h"
 
 enum class action {
     NORTH, SOUTH, WEST, EAST, INVALID, HELP, TAKE, DROP, INV, INFO
@@ -20,12 +20,15 @@ public:
 
     action getType() const;
     std::string getItem() const;
-    int getAmount()const;
+    int getAmount() const;
+    ItemDescriptor* getItemDescriptor() const;
+    void setItemDescriptor(ItemDescriptor* itemDescriptor);
 
 private:
     action type;
     std::string item;
     int amount;
+    ItemDescriptor* itemDescriptor;
 };
 
 

@@ -90,3 +90,11 @@ void Action::Parse(std::string &row, const std::vector<std::string>& kywrd) {
     }
     return;
 }
+
+ItemDescriptor* Action::getItemDescriptor() const {
+    return itemDescriptor;
+}
+
+void Action::setItemDescriptor(ItemDescriptor* itemDescriptor) {
+    Action::itemDescriptor = itemDescriptor;
+}

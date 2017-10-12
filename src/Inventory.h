@@ -9,7 +9,7 @@ class Inventory {
 public:
     Inventory();
     void addItem(Item* item);
-    void removeItem(Item* item);
+    int removeItem(const Item* item);
     void displayInventory() const;
     int getWeight() const;
 
