@@ -54,8 +54,8 @@ void Inventory::displayInventory() const {
 }
 
 void Inventory::tansferAllFrom(Inventory* other) {
-    if(items.empty()) return;
-    for (auto item = items.end() - 1; item >= items.begin(); --item) {
+    if(other->items.empty()) return;
+    for (auto item = other->items.end() - 1; item >= other->items.begin(); --item) {
         auto itemToAdd = new Item((*item)->getDescriptor(), (*item)->getCount());
         if(!addItem(itemToAdd)) delete itemToAdd;
         other->removeItem(*item);
