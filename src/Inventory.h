@@ -10,12 +10,18 @@ public:
     Inventory();
     bool addItem(Item* item);
     int removeItem(const Item* item);
+    int removeAnItem(std::string keyWord);
+    bool checkItem(std::string keyWord);
+
     void displayInventory() const;
+
     int getWeight() const;
 
     void transferAllFrom(Inventory *other);
     void transferAllTo(Inventory* other);
+
     virtual ~Inventory();
+
 private:
     std::vector<Item*> items;
     int weight;

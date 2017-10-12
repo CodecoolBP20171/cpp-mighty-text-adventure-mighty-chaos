@@ -11,10 +11,12 @@ public:
     Room* getPosition() const;
     void showInventory() const;
     void act(Action* activity);
+    int getHealth() const;
 
 private:
     Room* position;
     Inventory inventory;
+    int health;
     bool isDirection(action act);
     void movePlayer(const action& type);
     void takeItem(const Action* activity);

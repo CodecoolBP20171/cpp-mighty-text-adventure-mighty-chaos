@@ -100,6 +100,8 @@ void Action::parseActionWord(const std::string& word) {
         type = action::DROP;
     } else if (word == "i" || word == "inv") {
         type = action::INV;
+    } else if (word == "p" || word == "stun") {
+        type = action::STUN;
     } else if (word == "info") {
         type = action::INFO;
     } else {
@@ -114,6 +116,7 @@ bool Action::isOneWordAction() const {
            type == action::WEST ||
            type == action::HELP ||
            type == action::INV ||
+           type == action::STUN ||
            type == action::INVALID;
 }
 

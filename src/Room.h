@@ -15,11 +15,15 @@ public:
     const string &getDescription() const;
     const string &getDoor() const;
     virtual ~Room();
+    bool isRoomOpen() const;
+    void setRoomState(bool state);
 
 private:
     const Area* area;
     std::vector<Connection*> connections;
     Inventory* inventory;
+    bool roomState;
+
 };
 
 #endif //CPP_2ND_TW_MIGHTY_TEXT_ADVENTURE_ROOM_H

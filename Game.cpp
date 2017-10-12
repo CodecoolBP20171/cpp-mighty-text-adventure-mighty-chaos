@@ -67,6 +67,9 @@ void Game::buildRooms() {
     rooms.emplace_back(new Room(&areas[4]));
     rooms.emplace_back(new Room(&areas[6]));
 
+    rooms[5]->setRoomState(false);
+    rooms[10]->setRoomState(false);
+
     rooms[0]->addConnection(direction::EAST, rooms[1]);
     rooms[1]->addConnection(direction::WEST, rooms[0]);
     rooms[1]->addConnection(direction::NORTH, rooms[2]);
@@ -153,14 +156,16 @@ void Game::loadItems() {
 }
 
 void Game::placeItems() {
-    rooms[0]->getInventory()->addItem(new Item(&items[0], 1));
-    rooms[1]->getInventory()->addItem(new Item(&items[5], 1));
+    rooms[0]->getInventory()->addItem(new Item(&items[3], 1));
+    rooms[1]->getInventory()->addItem(new Item(&items[0], 1));
+    rooms[2]->getInventory()->addItem(new Item(&items[1], 1));
+    rooms[3]->getInventory()->addItem(new Item(&items[4], 1));
+    rooms[5]->getInventory()->addItem(new Item(&items[5], 1));
     rooms[5]->getInventory()->addItem(new Item(&items[2], 1));
-    rooms[5]->getInventory()->addItem(new Item(&items[7], 1));
-    rooms[3]->getInventory()->addItem(new Item(&items[1], 1));
-    rooms[2]->getInventory()->addItem(new Item(&items[4], 1));
-    rooms[6]->getInventory()->addItem(new Item(&items[3], 1));
+    rooms[6]->getInventory()->addItem(new Item(&items[4], 10));
+    rooms[7]->getInventory()->addItem(new Item(&items[7], 1));
     rooms[8]->getInventory()->addItem(new Item(&items[6], 1));
+    rooms[9]->getInventory()->addItem(new Item(&items[3], 1));
     rooms[10]->getInventory()->addItem(new Item(&items[0], 1));
 }
 
@@ -175,7 +180,9 @@ bool Game::step() {
 
     for (auto conn : playerPosition->getConnections()) {
         std::cout << "To the " << conn->getDirStr() << " is ";
-        std::cout << ((Room*) (conn->getRoom()))->getDoor() << std::endl;
+        std::cout << ((Room*) (conn->getRoom()))->getDoor();
+        if (!((Room*) (conn->getRoom()))->isRoomOpen()) std::cout << " The door is closed.";
+        std::cout << std::endl;
     }
     if (playerPosition == rooms[11]) {
 
@@ -216,6 +223,10 @@ bool Game::step() {
     }
 
     player.act(&act);
+    if (player.getHealth() <= 0){
+        std::cout << "\nYou died!\n\n";
+        return true;
+    }
 
     return false;
 }
