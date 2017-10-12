@@ -15,6 +15,7 @@ public:
 
     void tansferAllFrom(Inventory* other);
     void transferAllTo(Inventory* other);
+    virtual ~Inventory();
 private:
     std::vector<Item*> items;
     int weight;

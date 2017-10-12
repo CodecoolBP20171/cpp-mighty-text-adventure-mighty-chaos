@@ -26,3 +26,8 @@ const string& Room::getDoor() const {
 Inventory* Room::getInventory() const {
     return inventory;
 }
+
+Room::~Room() {
+    for(auto conn : connections) delete conn;
+    delete inventory;
+}

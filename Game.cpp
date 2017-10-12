@@ -234,3 +234,7 @@ void Game::showHelp() {
             "Item info: i <item>\n";
 }
 
+Game::~Game() {
+    for(auto room : rooms) delete room;
+}
+

@@ -15,6 +15,7 @@ public:
     void addConnection(direction dir, Room* room);
     const string &getDescription() const;
     const string &getDoor() const;
+    virtual ~Room();
 
 private:
     const Area* area;

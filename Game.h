@@ -14,6 +14,7 @@ using namespace std;
 class Game {
 public:
     Game();
+    virtual ~Game();
 
     void init();
     void run();

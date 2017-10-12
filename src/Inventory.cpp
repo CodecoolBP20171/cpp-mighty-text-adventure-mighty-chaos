@@ -54,15 +54,23 @@ void Inventory::displayInventory() const {
 }
 
 void Inventory::tansferAllFrom(Inventory* other) {
+    if(items.empty()) return;
     for (auto item = items.end() - 1; item >= items.begin(); --item) {
-        addItem(new Item((*item)->getDescriptor(), (*item)->getCount()));
+        auto itemToAdd = new Item((*item)->getDescriptor(), (*item)->getCount());
+        if(!addItem(itemToAdd)) delete itemToAdd;
         other->removeItem(*item);
     }
 }
 
 void Inventory::transferAllTo(Inventory* other) {
+    if (items.empty()) return;
     for (auto item = items.end() - 1; item >= items.begin(); --item) {
-        other->addItem(new Item((*item)->getDescriptor(), (*item)->getCount()));
+        auto itemToAdd = new Item((*item)->getDescriptor(), (*item)->getCount());
+        if(!other->addItem(itemToAdd)) delete itemToAdd;
         removeItem(*item);
     }
+}
+
+Inventory::~Inventory() {
+    for(auto item : items) delete item;
 }
