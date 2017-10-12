@@ -10,7 +10,6 @@ public:
     int getCount() const;
     void changeCount(int diff);
     void setCount(int count);
-    const std::string& getName() const;
     const std::string toString() const;
     const std::string& getKeyword() const;
     const int getWeight() const;

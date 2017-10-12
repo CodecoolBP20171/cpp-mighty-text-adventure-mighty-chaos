@@ -8,8 +8,7 @@
 
 class Room {
 public:
-    Room(const Area* area);
-    const Area* getArea() const;
+    explicit Room(const Area* area);
     const vector<Connection*>& getConnections() const;
     Inventory* getInventory() const;
     void addConnection(direction dir, Room* room);

@@ -98,7 +98,7 @@ void Game::loadItems() {
     items.emplace_back("Chaos Creamy Meal",
                        "This delicious, tasty meal fully restore your HP",
                        "food", 10);
-    keywrds.emplace_back("food");
+    itemKeywords.emplace_back("food");
 
     items.emplace_back("Thunder Steel Katana",
                        "A thin, smooth blade made of adamantium is held by a grip wrapped in dull crocodile leather.\n"
@@ -108,31 +108,31 @@ void Game::loadItems() {
                                "A wide pommel is decorated with gilded linings, no expense is spared for this gorgeous weapon.\n"
                                "The blade itself is fairly simple, but the blade will surely be decorated in battle.",
                        "sword", 35);
-    keywrds.emplace_back("sword");
+    itemKeywords.emplace_back("sword");
 
     items.emplace_back("Insane Heartseeker Battle Axe",
                        "A large, sharp, dual-edged blade axe made of copper is held by a grip wrapped in sapphire blue boar hide\n"
                                "This is the ideal weapon if you're looking to slice, dice, stab and jab your enemies.\n"
                                "The blade itself is fairly simple. No decorations of any sorts are on it, an everyday weapon.",
                        "axe", 70);
-    keywrds.emplace_back("axe");
+    itemKeywords.emplace_back("axe");
 
     items.emplace_back("Key",
                        "A key.",
                        "key", 1);
-    keywrds.emplace_back("key");
+    itemKeywords.emplace_back("key");
 
     items.emplace_back("Potion of Daze",
                        "A potion\nThis potion stuns monsters, allows you to escape.",
                        "stun", 3);
-    keywrds.emplace_back("stun");
+    itemKeywords.emplace_back("stun");
 
     items.emplace_back("Light Wraps of Binding Warlords",
                        "This is a set of leather armor.\nIt covers everything from the neck down and ending at the groin,\n"
                                "It has a coif with two small horns. The breastplate is made from many v-shaped layers of leather and fur.\n"
                                "The legs are protected by leather greaves. Thin leather pants are worn beneath this all.",
                        "armor", 25);
-    keywrds.emplace_back("armor");
+    itemKeywords.emplace_back("armor");
 
     items.emplace_back("Heavy Armor of Broken Misery",
                        "This is a set of heavy armor.\nIt is made from many layers of squared metal sheets.\n"
@@ -140,7 +140,7 @@ void Game::loadItems() {
                                "The breastplate has a metal, mohawk-like ornament with a row of feathers inserted into it.\n"
                                "The legs are covered by pointed, half covering cuisses.",
                        "harmor", 75);
-    keywrds.emplace_back("harmor");
+    itemKeywords.emplace_back("harmor");
 
     items.emplace_back("Crying Heavy Shield",
                        "This sturdy rounded oval shield, made from ebonsteel, offers heavy duty protection.\n"
@@ -148,7 +148,7 @@ void Game::loadItems() {
                                "The shield's edges are enhanced with metal plating and have been decorated\n"
                                "with small repeated symbols. Its center is embellished with metalwork wings.",
                        "shield", 50);
-    keywrds.emplace_back("shield");
+    itemKeywords.emplace_back("shield");
     placeItems();
 }
 
@@ -225,7 +225,7 @@ void Game::getUserInput(Action* a) {
     std::cout << "\nWhat do you do? ";
     getline(std::cin, in);
     std::transform(in.begin(), in.end(), in.begin(), ::tolower);
-    a->Parse(in, keywrds);
+    a->Parse(in, itemKeywords);
 }
 
 void Game::showHelp() {

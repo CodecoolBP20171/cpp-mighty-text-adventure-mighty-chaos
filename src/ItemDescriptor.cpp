@@ -1,7 +1,7 @@
 #include "ItemDescriptor.h"
 
-ItemDescriptor::ItemDescriptor(const std::string& name, const std::string& decription, const std::string& keyword, const int weight) : name(
-        name), description(decription), keyword(keyword), weight(weight) {}
+ItemDescriptor::ItemDescriptor(const std::string& name, const std::string& description, const std::string& keyword, const int weight) : name(
+        name), description(description), keyword(keyword), weight(weight) {}
 
 const std::string& ItemDescriptor::getName() const {
     return name;

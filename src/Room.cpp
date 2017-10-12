@@ -2,10 +2,6 @@
 
 Room::Room(const Area* area) : area(area), inventory(new Inventory()) {}
 
-const Area* Room::getArea() const {
-    return area;
-}
-
 const vector<Connection*>& Room::getConnections() const {
     return connections;
 }

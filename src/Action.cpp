@@ -18,7 +18,7 @@ int Action::getAmount() const {
     return amount;
 }
 
-void Action::Parse(const std::string& row, const std::vector<std::string>& kywrd) {
+void Action::Parse(const std::string& row, const std::vector<std::string>& keyword) {
     if (row.empty()) {
         type = action::INVALID;
         return;
@@ -43,7 +43,7 @@ void Action::Parse(const std::string& row, const std::vector<std::string>& kywrd
         item = "all";
         return;
     }
-    parseItemKwd(kywrd, word);
+    parseItemKwd(keyword, word);
     if (item.empty()) { // no valid item keyword found
         type = action::INVALID;
         return;
@@ -68,10 +68,10 @@ void Action::Parse(const std::string& row, const std::vector<std::string>& kywrd
     }
 }
 
-void Action::parseItemKwd(const std::vector<std::string>& kywrd, const std::string& word) {
+void Action::parseItemKwd(const std::vector<std::string>& keyword, const std::string& word) {
     item.clear();
-    for (auto& itemkwd : kywrd) {
-        if (word == itemkwd) {
+    for (auto& itemKeyword : keyword) {
+        if (word == itemKeyword) {
             item = word;
             break;
         }

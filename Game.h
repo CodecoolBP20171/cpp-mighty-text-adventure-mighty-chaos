@@ -22,7 +22,7 @@ public:
 private:
     vector<Area> areas; // areas has only non-changeable information
     vector<ItemDescriptor> items; // items has only non-changeable information
-    vector<string> keywrds;
+    vector<string> itemKeywords;
     vector<Room*> rooms;
     Player player;
 

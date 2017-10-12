@@ -22,5 +22,4 @@ std::string Connection::getDirStr() const {
         case direction::EAST :
             return "East";
     }
-    return "No direction";
 }
