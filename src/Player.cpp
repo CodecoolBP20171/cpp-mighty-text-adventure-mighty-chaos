@@ -18,11 +18,13 @@ void Player::act(Action* activity) {
         return;
     }
     if (type == action::TAKE) {
-        takeItem(activity);
+        if(activity->getItem() == "all") inventory.tansferAllFrom(position->getInventory());
+        else takeItem(activity);
         return;
     }
     if (type == action::DROP) {
-        dropItem(activity);
+        if(activity->getItem() == "all") inventory.transferAllTo(position->getInventory());
+        else dropItem(activity);
         return;
     }
     if (type == action::INV) {
@@ -36,14 +38,14 @@ void Player::dropItem(const Action* activity) {
     auto item = new Item(activity->getItemDescriptor(), activity->getAmount());
     auto taken = inventory.removeItem(item);
     item->setCount(taken);
-    position->getInventory()->addItem(item);
+    if(!position->getInventory()->addItem(item)) delete item;
 }
 
 void Player::takeItem(const Action* activity) {
     auto item = new Item(activity->getItemDescriptor(), activity->getAmount());
     auto taken = position->getInventory()->removeItem(item);
     item->setCount(taken);
-    inventory.addItem(item);
+    if(!inventory.addItem(item)) delete item;
 }
 
 void Player::movePlayer(const action& type) {
@@ -65,3 +67,4 @@ bool Player::isDirection(action act) {
            act == action::NORTH ||
            act == action::SOUTH;
 }
+

@@ -19,6 +19,8 @@ private:
     void movePlayer(const action& type);
     void takeItem(const Action* activity);
     void dropItem(const Action* activity);
+    void takeAllItems();
+    void dropAllItems();
 };
 
 #endif //CPP_2ND_TW_MIGHTY_TEXT_ADVENTURE_PLAYER_H

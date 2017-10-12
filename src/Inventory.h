@@ -8,12 +8,13 @@ class Inventory {
 
 public:
     Inventory();
-    void addItem(Item* item);
+    bool addItem(Item* item);
     int removeItem(const Item* item);
     void displayInventory() const;
     int getWeight() const;
 
-
+    void tansferAllFrom(Inventory* other);
+    void transferAllTo(Inventory* other);
 private:
     std::vector<Item*> items;
     int weight;

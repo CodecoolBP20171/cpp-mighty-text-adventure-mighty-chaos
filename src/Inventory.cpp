@@ -7,17 +7,18 @@ int Inventory::getWeight() const {
     return weight;
 }
 
-void Inventory::addItem(Item* item) {
+bool Inventory::addItem(Item* item) {
     auto& newItemKeyword = item->getKeyword();
     for (auto i : items) {
         if (i->getKeyword() == newItemKeyword) {
             i->changeCount(item->getCount());
             weight += item->getCount() * item->getWeight();
-            return;
+            return false;
         }
     }
     items.push_back(item);
     weight += item->getCount() * item->getWeight();
+    return true;
 }
 
 int Inventory::removeItem(const Item* item) {
@@ -30,8 +31,11 @@ int Inventory::removeItem(const Item* item) {
                         ? (*iter)->getCount()
                         : item->getCount();
             (*iter)->changeCount(-(item->getCount()));
-            if ((*iter)->getCount() <= 0) items.erase(iter);
             weight -= diff * item->getWeight();
+            if ((*iter)->getCount() <= 0) {
+                items.erase(iter);
+                delete *iter;
+            }
             return diff;
         }
         iter++;
@@ -47,4 +51,18 @@ void Inventory::displayInventory() const {
                   << std::endl;
     }
     std::cout << "Total weight: " << weight << std::endl;
+}
+
+void Inventory::tansferAllFrom(Inventory* other) {
+    for (auto item = items.end() - 1; item >= items.begin(); --item) {
+        addItem(new Item((*item)->getDescriptor(), (*item)->getCount()));
+        other->removeItem(*item);
+    }
+}
+
+void Inventory::transferAllTo(Inventory* other) {
+    for (auto item = items.end() - 1; item >= items.begin(); --item) {
+        other->addItem(new Item((*item)->getDescriptor(), (*item)->getCount()));
+        removeItem(*item);
+    }
 }

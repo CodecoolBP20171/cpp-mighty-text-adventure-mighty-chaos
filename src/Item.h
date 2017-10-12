@@ -14,6 +14,7 @@ public:
     const std::string& getDecription() const;
     const std::string& getKeyword() const;
     const int getWeight() const;
+    ItemDescriptor* getDescriptor() const;
 
 private:
     ItemDescriptor* descriptor;

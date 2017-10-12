@@ -30,3 +30,7 @@ const int Item::getWeight() const {
 void Item::setCount(int count) {
     Item::count = count;
 }
+
+ItemDescriptor* Item::getDescriptor() const {
+    return descriptor;
+}
