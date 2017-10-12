@@ -13,7 +13,7 @@ public:
     void displayInventory() const;
     int getWeight() const;
 
-    void tansferAllFrom(Inventory* other);
+    void transferAllFrom(Inventory *other);
     void transferAllTo(Inventory* other);
     virtual ~Inventory();
 private:

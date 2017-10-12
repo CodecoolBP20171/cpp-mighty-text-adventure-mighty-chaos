@@ -19,13 +19,20 @@ int Action::getAmount() const {
 }
 
 void Action::Parse(const std::string& row, const std::vector<std::string>& kywrd) {
-    if (row.empty()) return;
+    if (row.empty()) {
+        type = action::INVALID;
+        return;
+    }
+
     std::stringstream ss(row);
     std::string word;
+
     ss >> word;
     parseActionWord(word);
     if (isOneWordAction()) return;
+
     word.clear();
+
     ss >> word;
     if (word.empty()) { // no parameter provided where needed
         type = action::INVALID;

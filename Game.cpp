@@ -198,7 +198,9 @@ bool Game::step() {
         if (act.getType() == action::INFO) {
             for (auto& item : items) {
                 if (item.getKeyword() == act.getItem()) {
-                    std::cout << "" << std::endl;
+                    std::cout << item.getName() << " (" + item.getKeyword()
+                              << ", " << item.getWeight() << ")\n"
+                              << item.getDescription() << std::endl;
                 }
             }
         }

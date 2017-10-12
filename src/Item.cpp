@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Item.h"
 #include "ItemDescriptor.h"
 
@@ -15,8 +16,10 @@ const std::string& Item::getName() const {
     return descriptor->getName();
 }
 
-const std::string& Item::getDecription() const {
-    return descriptor->getDescription();
+const std::string Item::toString() const {
+    return std::to_string(count) + " " + descriptor->getName()
+              + " (" + descriptor->getKeyword() + ", "
+              + std::to_string(descriptor->getWeight()) + ")";
 }
 
 const std::string& Item::getKeyword() const {

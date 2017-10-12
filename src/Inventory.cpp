@@ -33,8 +33,8 @@ int Inventory::removeItem(const Item* item) {
             (*iter)->changeCount(-(item->getCount()));
             weight -= diff * item->getWeight();
             if ((*iter)->getCount() <= 0) {
-                items.erase(iter);
                 delete *iter;
+                items.erase(iter);
             }
             return diff;
         }
@@ -45,15 +45,12 @@ int Inventory::removeItem(const Item* item) {
 
 void Inventory::displayInventory() const {
     for (auto item:items) {
-        std::cout << item->getCount() << " " << item->getName()
-                  << " (" << item->getKeyword() << ", "
-                  << item->getWeight() << ")"
-                  << std::endl;
+        std::cout << item->toString() << std::endl;
     }
     std::cout << "Total weight: " << weight << std::endl;
 }
 
-void Inventory::tansferAllFrom(Inventory* other) {
+void Inventory::transferAllFrom(Inventory *other) {
     if(other->items.empty()) return;
     for (auto item = other->items.end() - 1; item >= other->items.begin(); --item) {
         auto itemToAdd = new Item((*item)->getDescriptor(), (*item)->getCount());

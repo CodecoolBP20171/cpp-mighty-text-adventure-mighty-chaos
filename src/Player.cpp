@@ -18,13 +18,25 @@ void Player::act(Action* activity) {
         return;
     }
     if (type == action::TAKE) {
-        if(activity->getItem() == "all") inventory.tansferAllFrom(position->getInventory());
-        else takeItem(activity);
+        if(activity->getItem() == "all") {
+            std::cout << "You take all the items."<< std::endl;
+            inventory.transferAllFrom(position->getInventory());
+        }
+        else {
+            std::cout << "You take the " << activity->getItem()<< std::endl;
+            takeItem(activity);
+        }
         return;
     }
     if (type == action::DROP) {
-        if(activity->getItem() == "all") inventory.transferAllTo(position->getInventory());
-        else dropItem(activity);
+        if(activity->getItem() == "all") {
+            std::cout << "You drop all your items."<< std::endl;
+            inventory.transferAllTo(position->getInventory());
+        }
+        else {
+            std::cout << "You drop your " << activity->getItem()<< std::endl;
+            dropItem(activity);
+        }
         return;
     }
     if (type == action::INV) {
@@ -49,16 +61,17 @@ void Player::takeItem(const Action* activity) {
 }
 
 void Player::movePlayer(const action& type) {
-    if(inventory.getWeight() > 50){
+    if(inventory.getWeight() > 120){
         std::cout << "You have too much stuff you can't move." << std::endl;
         return;
     }
     for (auto conn : position->getConnections()) {
         if (conn->getDir() == (direction) type) {
             position = (Room*) conn->getRoom();
-            break;
+            return;
         }
     }
+    std::cout << "BAAANG! You hit the wall. Try a door." << std::endl;
 }
 
 bool Player::isDirection(action act) {
