@@ -16,7 +16,7 @@ enum class action {
 class Action {
 
 public:
-    void Parse(std::string& row, const std::vector<std::string>& kywrd);
+    void Parse(const std::string& row, const std::vector<std::string>& kywrd);
 
     action getType() const;
     std::string getItem() const;
@@ -29,6 +29,10 @@ private:
     std::string item;
     int amount;
     ItemDescriptor* itemDescriptor;
+    bool isOneWordAction() const;
+    void parseActionWord(const std::string& word);
+    bool isTakeAllOrDropAll(const std::string& word) const;
+    void parseItemKwd(const std::vector<std::string>& kywrd, const std::string& word);
 };
 
 

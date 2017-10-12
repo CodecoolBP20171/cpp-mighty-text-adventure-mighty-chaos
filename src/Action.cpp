@@ -18,11 +18,65 @@ int Action::getAmount() const {
     return amount;
 }
 
-void Action::Parse(std::string &row, const std::vector<std::string>& kywrd) {
+void Action::Parse(const std::string& row, const std::vector<std::string>& kywrd) {
+    if (row.empty()) return;
     std::stringstream ss(row);
     std::string word;
     ss >> word;
+    parseActionWord(word);
+    if (isOneWordAction()) return;
+    word.clear();
+    ss >> word;
+    if (word.empty()) { // no parameter provided where needed
+        type = action::INVALID;
+        return;
+    }
+    if (isTakeAllOrDropAll(word)) { // 'take all' or 'drop all'
+        amount = 0;
+        item = "all";
+        return;
+    }
+    parseItemKwd(kywrd, word);
+    if (item.empty()) { // no valid item keyword found
+        type = action::INVALID;
+        return;
+    }
+    if (type == action::INFO) return; // 'info <item>' action parsing done
+    // parsing amount
+    word.clear();
+    ss >> word;
+    if (word.empty()) { // default case (no amount given)
+        amount = 1;
+        return;
+    }
+    if (word == "all") amount = 0;
+    else {
+        try {
+            amount = std::stoi(word);
+        } catch (std::invalid_argument&) {
+            type = action::INVALID;
+        } catch (std::out_of_range&) {
+            type = action::INVALID;
+        }
+    }
+}
 
+void Action::parseItemKwd(const std::vector<std::string>& kywrd, const std::string& word) {
+    item.clear();
+    for (auto& itemkwd : kywrd) {
+        if (word == itemkwd) {
+            item = word;
+            break;
+        }
+    }
+}
+
+bool Action::isTakeAllOrDropAll(const std::string& word) const {
+    return (type == action::TAKE || type == action::DROP) &&
+           word == "all";
+}
+
+void Action::parseActionWord(const std::string& word) {
     if (word == "w" || word == "west") {
         type = action::WEST;
     } else if (word == "n" || word == "north") {
@@ -41,54 +95,19 @@ void Action::Parse(std::string &row, const std::vector<std::string>& kywrd) {
         type = action::INV;
     } else if (word == "info") {
         type = action::INFO;
-    } else type = action ::INVALID;
-
-    ss >> word;
-    if (type == action::TAKE || type == action::DROP) {
-
-        if (word == "all") {
-            amount = 0;
-            item = "all";
-            return;
-        }
+    } else {
+        type = action::INVALID;
     }
+}
 
-    if (type == action::TAKE || type == action::DROP || type == action::INFO) {
-        item = "";
-        for (std::string itemkwd : kywrd) {
-            if (word == itemkwd) {
-                item = word;
-                break;
-            }
-        }
-        if (item == "") {
-            type = action::INVALID;
-            return;
-
-        } else if (type != action::INFO) {
-            word = "";
-            ss >> word;
-
-            if (word == "all") {
-                amount = 0;
-            } else {
-
-                if (word == "") {
-                    amount = 1;
-                    return;
-                }
-
-                try {
-                    amount = std::stoi(word);
-                } catch (std::invalid_argument) {
-                    type = action ::INVALID;
-                } catch (std::out_of_range) {
-                    type = action ::INVALID;
-                }
-            }
-        }
-    }
-    return;
+bool Action::isOneWordAction() const {
+    return type == action::NORTH ||
+           type == action::SOUTH ||
+           type == action::EAST ||
+           type == action::WEST ||
+           type == action::HELP ||
+           type == action::INV ||
+           type == action::INVALID;
 }
 
 ItemDescriptor* Action::getItemDescriptor() const {
