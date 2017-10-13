@@ -60,6 +60,9 @@ void Action::Parse(const std::string& row, const std::vector<std::string>& keywo
     else {
         try {
             amount = std::stoi(word);
+            if (amount < 1) {
+                throw std::invalid_argument("");
+            }
         } catch (std::invalid_argument&) {
             type = action::INVALID;
         } catch (std::out_of_range&) {
@@ -100,8 +103,8 @@ void Action::parseActionWord(const std::string& word) {
         type = action::DROP;
     } else if (word == "i" || word == "inv") {
         type = action::INV;
-    } else if (word == "p" || word == "stun") {
-        type = action::STUN;
+    } else if (word == "u" || word == "use") {
+        type = action::USE;
     } else if (word == "info") {
         type = action::INFO;
     } else {
@@ -116,7 +119,6 @@ bool Action::isOneWordAction() const {
            type == action::WEST ||
            type == action::HELP ||
            type == action::INV ||
-           type == action::STUN ||
            type == action::INVALID;
 }
 

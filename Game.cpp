@@ -240,11 +240,11 @@ void Game::getUserInput(Action* a) {
 }
 
 void Game::showHelp() {
-    std::cout << "\nControls:\n\nMoving: w, n, s, e\n"
-            "Take items: One: t <item type>, Any: t <item type> <number>, All: t all\n"
-            "Drop items: One: d <item type>, Any: d <item type> <number>, All: d all\n"
-            "Check inventory: inv\n"
-            "Item info: i <item>\n";
+    std::cout << "\nControls:\n\nMoving: w/west, n/north, s/south, e/east\n"
+            "Take items: One: t <item type>, Any: t <item type> <number>/all, All: t all\n"
+            "Drop items: One: d <item type>, Any: d <item type> <number>/all, All: d all\n"
+            "Check inventory: i/inv\n"
+            "Item info: info <item>\n";
 }
 
 Game::~Game() {

@@ -23,7 +23,7 @@ bool Inventory::addItem(Item* item) {
 
 bool Inventory::checkItem(std::string keyWord) {
     auto iter = items.begin();
-    while (iter < items.end()) {
+    while (iter != items.end()) {
         if ((*iter)->getKeyword() == keyWord) return true;
     }
     return false;
@@ -31,8 +31,9 @@ bool Inventory::checkItem(std::string keyWord) {
 
 int Inventory::removeAnItem(std::string keyWord) {
     auto iter = items.begin();
-    while (iter < items.end()) {
+    while (iter != items.end()) {
         if ((*iter)->getKeyword() == keyWord) {
+
             (*iter)->changeCount(-1);
             weight -= (*iter)->getWeight();
 
@@ -50,7 +51,7 @@ int Inventory::removeAnItem(std::string keyWord) {
 int Inventory::removeItem(const Item* item) {
     auto& removedItemKeyword = item->getKeyword();
     auto iter = items.begin();
-    while (iter < items.end()) {
+    while (iter !=items.end()) {
         if ((*iter)->getKeyword() == removedItemKeyword) {
             auto diff = ((*iter)->getCount() - item->getCount() < 0) ||
                         item->getCount() == 0

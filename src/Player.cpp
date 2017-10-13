@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Player.h"
 
-Player::Player(Room* position) : position(position), health(7) {}
+Player::Player(Room* position) : position(position), health(7), maxWeight(120) {}
 
 Room* Player::getPosition() const {
     return position;
@@ -17,41 +17,54 @@ void Player::act(Action* activity) {
         movePlayer(type);
         return;
     }
-    if (type == action::TAKE) {
-        if(activity->getItem() == "all") {
-            std::cout << "You take all the items."<< std::endl;
-            inventory.transferAllFrom(position->getInventory());
+    switch (type) {
+        case action::TAKE : {
+
+            if (activity->getItem() == "all") {
+                std::cout << "You take all the items." << std::endl;
+                inventory.transferAllFrom(position->getInventory());
+            } else {
+                std::cout << "You take the " << activity->getItem() << std::endl;
+                takeItem(activity);
+            }
+            return;
         }
-        else {
-            std::cout << "You take the " << activity->getItem()<< std::endl;
-            takeItem(activity);
+
+        case action::DROP : {
+
+            if (activity->getItem() == "all") {
+                std::cout << "You drop all your items." << std::endl;
+                inventory.transferAllTo(position->getInventory());
+            } else {
+                std::cout << "You drop your " << activity->getItem() << std::endl;
+                dropItem(activity);
+            }
+            return;
         }
-        return;
-    }
-    if (type == action::DROP) {
-        if(activity->getItem() == "all") {
-            std::cout << "You drop all your items."<< std::endl;
-            inventory.transferAllTo(position->getInventory());
+
+        case action::INV : {
+
+            std::cout << "\nYour inventory:" << std::endl;
+            showInventory();
+            return;
         }
-        else {
-            std::cout << "You drop your " << activity->getItem()<< std::endl;
-            dropItem(activity);
-        }
-        return;
-    }
-    if (type == action::INV) {
-        std::cout << "\nYour inventory:" << std::endl;
-        showInventory();
-        return;
-    }
-    if (type == action::STUN) {
-        if (inventory.checkItem("stun")) {
-            inventory.removeAnItem("stun");
-            health--;
-            std::cout << "You use your stun potion to knock yourself out."
-                    "You lost 1 health.\n"
-                    "You still have "
-                      << health << " health." << std::endl;
+
+        case action::USE : {
+
+            if (activity->getItem() == "stun") {
+                if (inventory.checkItem("stun")) {
+                    inventory.removeAnItem("stun");
+                    health--;
+                    std::cout << "You use your stun potion to knock yourself out.\n"
+                            "You lost 1 health. You still have "
+                              << health
+                              << " health."
+                              << std::endl;
+                    return;
+                }
+            }
+            std::cout << "You can't use this yet." << std::endl;
+            return;
         }
     }
 }
@@ -72,7 +85,10 @@ void Player::takeItem(const Action* activity) {
 
 void Player::movePlayer(const action& type) {
     if(inventory.getWeight() > 120){
-        std::cout << "You have too much stuff you can't move." << std::endl;
+        std::cout << "You have too much stuff you can't move. Try go below "
+                  << maxWeight
+                  << "!"
+                  << std::endl;
         return;
     }
     for (auto conn : position->getConnections()) {

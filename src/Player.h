@@ -17,6 +17,7 @@ private:
     Room* position;
     Inventory inventory;
     int health;
+    int maxWeight;
     bool isDirection(action act);
     void movePlayer(const action& type);
     void takeItem(const Action* activity);

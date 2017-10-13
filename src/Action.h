@@ -10,7 +10,7 @@
 #include "ItemDescriptor.h"
 
 enum class action {
-    NORTH, SOUTH, WEST, EAST, INVALID, HELP, TAKE, DROP, INV, INFO, STUN
+    NORTH, SOUTH, WEST, EAST, INVALID, HELP, TAKE, DROP, INV, INFO, USE
 };
 
 class Action {
